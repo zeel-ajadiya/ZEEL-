@@ -1,0 +1,80 @@
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+long long int t,n,a[1000][1000],rcount[1000],ccount[1000],control[1000],b[1000],tri[1000];
+int main() {
+cin>>t;
+string s[t];
+for(int o=1; o<=t; o++)
+{
+   tri[o]=0;
+   cin>>n;
+   for(int i=1; i<=n; i++)
+   {
+       control[i-1]=i;
+   }
+   long long int b[n];
+   for(int i=0; i<n; i++)
+   {
+       for(int j=0; j<n; j++)
+       {
+           cin>>a[i][j];
+
+       }
+   }
+    for(int i=0; i<n; i++)
+   {
+       for(int j=0; j<n; j++)
+       {
+           if(i==j)
+            tri[o]+=a[i][j];
+
+       }
+   }
+   //rows
+   rcount[o]=0;
+   for(int j=0; j<n; j++)
+   {
+       for(int i=0; i<n; i++)
+       {
+           b[i]=a[j][i];
+
+       }
+       sort(b,b+n);
+
+       for(int k=0; k<n; k++)
+       {
+           if(b[k]!=control[k])
+           {
+               rcount[o]++; break;
+           }
+       }
+   }
+   ccount[o]=0;
+   for(int i=0; i<n; i++)
+   {
+       for(int j=0; j<n; j++)
+       {
+           b[j]=a[j][i];
+
+       }
+       sort(b,b+n);
+
+       for(int k=0; k<n; k++)
+       {
+           if(b[k]!=control[k])
+           {
+               ccount[o]++; break;
+           }
+       }
+   }
+
+
+}
+for(int i=1; i<=t; i++)
+{
+    cout<<"Case #"<<i<<": "<<tri[i]<<" "<<rcount[i]<<" "<<ccount[i];
+    cout<<endl;
+}
+return 0;
+}
