@@ -1,0 +1,75 @@
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+long long int t,a,c=0;
+int main() {
+cin>>t;
+string s[t],st[t];
+string temp;
+for(int i=0;i<t;i++)
+{
+   cin>>s[i];
+   st[i]="";
+   int len1=s[i].length();
+   if(len1>0)
+   {
+       a=s[i][0]-'0';
+       for(int j=1;j<=a;j++)
+       {
+           st[i].push_back('('); c++;
+       }
+       st[i].push_back(s[i][0]);
+   }
+   for(int j=1; j<len1; j++)
+   {   a=s[i][j-1]-'0';
+       int tt=s[i][j]-'0';
+       if(c==0)
+       {
+           for(int k=1;k<=tt;k++)
+           {
+               st[i].push_back('('); c++;
+           }
+           st[i].push_back(s[i][j]); continue;
+       }
+       if((tt)<(a))
+       {
+           int diff=(a)-(tt);
+
+           for(int k=1;k<=diff;k++)
+           {
+               st[i].push_back(')'); c--;
+           }
+            st[i].push_back(s[i][j]);continue;
+       }
+       if((tt)==(a))
+       {
+
+            st[i].push_back(s[i][j]);continue;
+       }
+       if((tt)>(a))
+       {    if(tt<c){
+           for(int k=1;k<=c;k++)
+           {
+               st[i].push_back(')');
+           } c=0;}
+           int re=c;
+           for(int k=re;k<tt;k++)
+           {
+               st[i].push_back('('); c++;
+           }
+
+           st[i].push_back(s[i][j]);continue;
+
+       }
+   }
+   while(c!=0)
+   {
+       st[i].push_back(')'); c--;
+   }
+}
+for(int i=1; i<=t; i++)
+{
+    cout<<"Case #"<<i<<": "<<st[i-1]<<endl;
+}
+return 0;
+}
